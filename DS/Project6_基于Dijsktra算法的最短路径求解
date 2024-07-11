@@ -3,11 +3,11 @@
 #include<string>
 #include<cstring>
 #define MaxInt 32767
-#define MVNum 100//×î´ó¶¥µãÊı
-/* ×¢ÒâÊÇÓĞÏòÍ¼£¬ÓÃÁÚ½Ó¾ØÕó
+#define MVNum 100//æœ€å¤§é¡¶ç‚¹æ•°
+/* æ³¨æ„æ˜¯æœ‰å‘å›¾ï¼Œç”¨é‚»æ¥çŸ©é˜µ
 */
-int D[MVNum];//Æğµã¿ªÊ¼µ½¸÷¸öµãµÄ¾àÀë
-int S[MVNum];//ÊÇ·ñ·ÃÎÊ¹ı
+int D[MVNum];//èµ·ç‚¹å¼€å§‹åˆ°å„ä¸ªç‚¹çš„è·ç¦»
+int S[MVNum];//æ˜¯å¦è®¿é—®è¿‡
 int Path[MVNum];
 using namespace std;
 typedef struct
@@ -16,7 +16,7 @@ typedef struct
 	int arcs[MVNum][MVNum];
 	int vexnum, arcnum;
 }AMGraph;
-int Locate(AMGraph& G, char s)//·µ»Ø±àºÅ
+int Locate(AMGraph& G, char s)//è¿”å›ç¼–å·
 {
 	for (int i = 1; i <= G.vexnum; i++)
 	{
@@ -43,7 +43,7 @@ void Creat(AMGraph& G)
 		int h, t;
 		h = Locate(G, a);
 		t = Locate(G, b);
-		G.arcs[h][t] = c;//ÓĞÏòÍ¼
+		G.arcs[h][t] = c;//æœ‰å‘å›¾
 	}
 }
 void Dijkstra(AMGraph& G, int v0)
@@ -86,7 +86,7 @@ void Dijkstra(AMGraph& G, int v0)
 }
 void Print(AMGraph& G, int s, int e)
 {
-	int r[MVNum];//¼ÇÂ¼Â·¾¶µÄ±àºÅ
+	int r[MVNum];//è®°å½•è·¯å¾„çš„ç¼–å·
 	r[0] = e;
 	int i = 1;
 	while (Path[r[i - 1]] != -1)
