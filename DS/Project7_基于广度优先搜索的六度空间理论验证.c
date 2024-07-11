@@ -29,7 +29,7 @@ int main()
 
 void CreateGraph(int n, int m)
 {
-	//ÓÃÁÚ½Ó¾ØÕó±íÊ¾Í¼
+	//ç”¨é‚»æ¥çŸ©é˜µè¡¨ç¤ºå›¾
 	int i, j;
 	int v1, v2;
 	Nv = n;
@@ -38,28 +38,28 @@ void CreateGraph(int n, int m)
 	{
 		for (j = 0; j <= Nv; j++)
 		{
-			G[i][j] = 0;  //³õÊ¼»¯
+			G[i][j] = 0;  //åˆå§‹åŒ–
 		}
 	}
-	for (i = 0; i < Ne; i++)  //×¢ÒâÕâÀïÊÇ¶ÁÈë±ß
+	for (i = 0; i < Ne; i++)  //æ³¨æ„è¿™é‡Œæ˜¯è¯»å…¥è¾¹
 	{
 		scanf("%d %d", &v1, &v2);
 		G[v1][v2] = 1;
-		G[v2][v1] = G[v1][v2];  //ÎŞÏòÍ¼¶Ô³Æ
+		G[v2][v1] = G[v1][v2];  //æ— å‘å›¾å¯¹ç§°
 	}
 }
 
 int BFSTraverse(int i)
 {
-	int q[MAXVEX] = { 0 }; //ÓÃÊı×é±íÊ¾¶ÓÁĞ
+	int q[MAXVEX] = { 0 }; //ç”¨æ•°ç»„è¡¨ç¤ºé˜Ÿåˆ—
 	int rear = -1, front = -1;
 	int j;
 	int temp;
 	int cnt;
 
-	int level;   //µ±Ç°½áµãËùÔÚµÄ²ãÊı
-	int last;      //¸Ã²ãµÄ×îºóÒ»¸ö½áµã
-	int tail;    //×îºóÒ»¸ö½øÈë¶ÓÁĞµÄ½áµã
+	int level;   //å½“å‰ç»“ç‚¹æ‰€åœ¨çš„å±‚æ•°
+	int last;      //è¯¥å±‚çš„æœ€åä¸€ä¸ªç»“ç‚¹
+	int tail;    //æœ€åä¸€ä¸ªè¿›å…¥é˜Ÿåˆ—çš„ç»“ç‚¹
 
 	for (j = 0; j <= Nv; j++)
 	{
@@ -68,12 +68,12 @@ int BFSTraverse(int i)
 
 	visited[i] = 1;
 	cnt = 1;
-	level = 0;   //±¾½áµã²»ËãÔÚ²ãÊıÀï
+	level = 0;   //æœ¬ç»“ç‚¹ä¸ç®—åœ¨å±‚æ•°é‡Œ
 	last = i;
-	q[++rear] = i;  //Èë¶Ó
-	while (front < rear)    //ÅĞ¶Ï¶ÓÁĞÊÇ·ñÎª¿Õ
+	q[++rear] = i;  //å…¥é˜Ÿ
+	while (front < rear)    //åˆ¤æ–­é˜Ÿåˆ—æ˜¯å¦ä¸ºç©º
 	{
-		temp = q[++front];  //³ö¶Ó
+		temp = q[++front];  //å‡ºé˜Ÿ
 
 		for (j = 1; j <= Nv; j++)
 		{
