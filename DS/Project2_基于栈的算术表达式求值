@@ -44,13 +44,13 @@ BT createTree()
 			op.push(s[i]);
 	}
 	BT Head = NULL;
-	int flag = 0;     //±ê¼ÇÓĞÀ¨ºÅÊ±µÄÇé¿ö 
-	int sflag = 0;      //´¦Àí¿ªÊ¼Ê±ÎªÀ¨ºÅµÄÇé¿ö 
+	int flag = 0;     //æ ‡è®°æœ‰æ‹¬å·æ—¶çš„æƒ…å†µ 
+	int sflag = 0;      //å¤„ç†å¼€å§‹æ—¶ä¸ºæ‹¬å·çš„æƒ…å†µ 
 	if (s[0] == '(') sflag = 1;
-	while (!op.empty())//·Ç¿Õ
+	while (!op.empty())//éç©º
 	{
 		char option;
-		option = op.front();//È¡µÚÒ»¸öÔËËã·û
+		option = op.front();//å–ç¬¬ä¸€ä¸ªè¿ç®—ç¬¦
 		op.pop();
 		if (option != '(' && option != ')')
 		{
@@ -64,7 +64,7 @@ BT createTree()
 						T->Left = createNode(num.front());
 						num.pop();
 						T->Right = createNode(num.front());
-						num.pop();//È¡Á½¸öÊı£¬×÷ÎªÁ½¸öº¢×Ó
+						num.pop();//å–ä¸¤ä¸ªæ•°ï¼Œä½œä¸ºä¸¤ä¸ªå­©å­
 					}
 					else
 					{
