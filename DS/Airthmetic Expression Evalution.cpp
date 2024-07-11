@@ -1,0 +1,187 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<stack>
+#include<string>
+#include<cstring>
+#include<queue>
+using namespace std;
+typedef struct Node* BinTree;
+typedef BinTree BT;
+string s;
+queue<char> num;
+queue<char> op;
+struct Node
+{
+	char Data;
+	BT Left;
+	BT Right;
+	int ans;
+};
+
+int fact(char c)
+{
+	if (c >= '0' && c <= '9') return 1;
+	else return 2;
+}
+BT createNode(char c)
+{
+	BT p = new Node;
+	p->Data = c;
+	p->Left = p->Right = NULL;
+	if (fact(c) == 1)
+		p->ans = c - '0';
+	else
+		p->ans = 0;
+	return p;
+}
+BT createTree()
+{
+	for (int i = 0; i < s.size() - 1; i++)
+	{
+		if (fact(s[i]) == 1)
+			num.push(s[i]);
+		else
+			op.push(s[i]);
+	}
+	BT Head = NULL;
+	int flag = 0;     //标记有括号时的情况 
+	int sflag = 0;      //处理开始时为括号的情况 
+	if (s[0] == '(') sflag = 1;
+	while (!op.empty())//非空
+	{
+		char option;
+		option = op.front();//取第一个运算符
+		op.pop();
+		if (option != '(' && option != ')')
+		{
+			BT T = createNode(option);
+			if (option == '+' || option == '-')
+			{
+				if (flag == 0)
+				{
+					if (Head == NULL)
+					{
+						T->Left = createNode(num.front());
+						num.pop();
+						T->Right = createNode(num.front());
+						num.pop();//取两个数，作为两个孩子
+					}
+					else
+					{
+						T->Left = Head;
+						T->Right = createNode(num.front());
+						num.pop();
+					}
+					Head = T;
+				}
+				else
+				{
+					if (Head == NULL)
+					{
+						T->Left = createNode(num.front());
+						num.pop();
+						T->Right = createNode(num.front());
+						num.pop();
+						Head = T;
+					}
+					else
+					{
+						T->Left = Head->Right;
+						Head->Right = T;
+						T->Right = createNode(num.front());
+						num.pop();
+					}
+				}
+			}
+			else
+				if (option == '*' || option == '/')
+				{
+					if (flag == 0)
+					{
+						if (Head == NULL)
+						{
+							T->Left = createNode(num.front());
+							num.pop();
+							T->Right = createNode(num.front());
+							num.pop();
+							Head = T;
+						}
+						else
+						{
+							if (sflag == 1 || Head->Data == '*' || Head->Data == '/')
+							{
+								T->Left = Head;
+								Head = T;
+								T->Right = createNode(num.front());
+								num.pop();
+								sflag = 0;
+							}
+							else
+							{
+								T->Left = Head->Right;
+								Head->Right = T;
+								T->Right = createNode(num.front());
+								num.pop();
+							}
+						}
+					}
+					if (flag == 1)
+					{
+						if (Head == NULL)
+						{
+							T->Left = createNode(num.front());
+							num.pop();
+							T->Right = createNode(num.front());
+							num.pop();
+							Head = T;
+						}
+						else
+						{
+							T->Left = Head->Right;
+							Head->Right = T;
+							T->Right = createNode(num.front());
+							num.pop();
+						}
+					}
+
+				}
+		}
+		else if (option == '(')
+		{
+			flag = 1;
+
+		}
+		else if (option == ')')
+		{
+			flag = 0;
+		}
+	}
+	return Head;
+}
+
+void solve(BT L)
+{
+	if (L)
+	{
+		solve(L->Left);
+		solve(L->Right);
+		char option = L->Data;
+		if (option == '+') L->ans = L->Left->ans + L->Right->ans;
+		if (option == '-') L->ans = L->Left->ans - L->Right->ans;
+		if (option == '*') L->ans = L->Left->ans * L->Right->ans;
+		if (option == '/') L->ans = L->Left->ans / L->Right->ans;
+
+	}
+}
+
+int main() {
+	while (cin >> s && s[0] != '=')
+	{
+		BT H = createTree();
+		solve(H);
+		cout << H->ans << endl;
+	}
+	return 0;
+}
+
+
