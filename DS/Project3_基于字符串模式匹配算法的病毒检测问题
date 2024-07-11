@@ -4,16 +4,16 @@
 
 bool isInfected(const std::string& virus, const std::string& patientDNA) {
 	if (virus.length() > patientDNA.length()) {
-		return false; // ²¡¶¾ DNA ĞòÁĞ±È»¼Õß DNA ĞòÁĞ³¤£¬ÎŞ·¨Æ¥Åä
+		return false; // ç—…æ¯’ DNA åºåˆ—æ¯”æ‚£è€… DNA åºåˆ—é•¿ï¼Œæ— æ³•åŒ¹é…
 	}
 
 	std::string doubledPatientDNA = patientDNA + patientDNA;
 
 	if (doubledPatientDNA.find(virus) != std::string::npos) {
-		return true; // ÕÒµ½²¡¶¾ DNA ĞòÁĞ£¬±íÊ¾¸ĞÈ¾
+		return true; // æ‰¾åˆ°ç—…æ¯’ DNA åºåˆ—ï¼Œè¡¨ç¤ºæ„ŸæŸ“
 	}
 
-	return false; // Î´ÕÒµ½²¡¶¾ DNA ĞòÁĞ£¬Î´¸ĞÈ¾
+	return false; // æœªæ‰¾åˆ°ç—…æ¯’ DNA åºåˆ—ï¼Œæœªæ„ŸæŸ“
 }
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
 
 	while (std::cin >> virus >> patientDNA) {
 		if (virus == "0" && patientDNA == "0") {
-			break; // ÊäÈë½áÊø
+			break; // è¾“å…¥ç»“æŸ
 		}
 
 		if (isInfected(virus, patientDNA)) {
