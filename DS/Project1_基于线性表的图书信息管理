@@ -19,13 +19,13 @@ int main() {
 
 
 	while (1) {
-		printf("Ñ¡Ôñ¹¦ÄÜ:\n");
-		printf("1. Í¼ÊéĞÅÏ¢±íµÄ´´½¨ºÍÊä³ö\n");
-		printf("2. Í¼ÊéĞÅÏ¢±íµÄĞŞ¸Ä\n");
-		printf("3. ²éÕÒ¼Û¸ñ×î¸ßµÄÍ¼Êé\n");
-		printf("4. ĞÂÍ¼ÊéµÄÈë¿â\n");
-		printf("5. ¾ÉÍ¼ÊéµÄ³ö¿â\n");
-		printf("6. ÍË³ö\n");
+		printf("é€‰æ‹©åŠŸèƒ½:\n");
+		printf("1. å›¾ä¹¦ä¿¡æ¯è¡¨çš„åˆ›å»ºå’Œè¾“å‡º\n");
+		printf("2. å›¾ä¹¦ä¿¡æ¯è¡¨çš„ä¿®æ”¹\n");
+		printf("3. æŸ¥æ‰¾ä»·æ ¼æœ€é«˜çš„å›¾ä¹¦\n");
+		printf("4. æ–°å›¾ä¹¦çš„å…¥åº“\n");
+		printf("5. æ—§å›¾ä¹¦çš„å‡ºåº“\n");
+		printf("6. é€€å‡º\n");
 		scanf("%d", &choice);
 
 		switch (choice) {
@@ -104,7 +104,7 @@ int main() {
 				scanf("%d", &insertPosition);
 				scanf("%s %s %f", newBook.number, newBook.title, &newBook.price);
 				if (insertPosition < 1 || insertPosition > n + 1) {
-					printf("±§Ç¸£¬Èë¿âÎ»ÖÃ·Ç·¨!\n");
+					printf("æŠ±æ­‰ï¼Œå…¥åº“ä½ç½®éæ³•!\n");
 				} else {
 					for (int i = n; i >= insertPosition; i--) {
 						books[i] = books[i - 1];
@@ -124,7 +124,7 @@ int main() {
 				}
 				scanf("%d", &deletePosition);
 				if (deletePosition < 1 || deletePosition > n) {
-					printf("±§Ç¸£¬³ö¿âÎ»ÖÃ·Ç·¨!\n");
+					printf("æŠ±æ­‰ï¼Œå‡ºåº“ä½ç½®éæ³•!\n");
 				} else {
 					for (int i = deletePosition - 1; i < n - 1; i++) {
 						books[i] = books[i + 1];
@@ -141,7 +141,7 @@ int main() {
 				break;
 
 			default:
-				printf("ÊäÈëÎŞĞ§£¬ÇëÖØĞÂÊäÈë¡£\n");
+				printf("è¾“å…¥æ— æ•ˆï¼Œè¯·é‡æ–°è¾“å…¥ã€‚\n");
 		}
 	}
 
