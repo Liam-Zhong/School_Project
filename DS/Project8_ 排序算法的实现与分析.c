@@ -17,7 +17,7 @@ void quickSort(Student arr[], int left, int right) {
 			while (arr[j].score < pivot) j--;
 
 			if (i <= j) {
-				// ½»»»ÔªËØ
+				// äº¤æ¢å…ƒç´ 
 				Student temp = arr[i];
 				arr[i] = arr[j];
 				arr[j] = temp;
@@ -26,7 +26,7 @@ void quickSort(Student arr[], int left, int right) {
 			}
 		}
 
-		// µÝ¹éÅÅÐò×ó°ë²¿·ÖºÍÓÒ°ë²¿·Ö
+		// é€’å½’æŽ’åºå·¦åŠéƒ¨åˆ†å’Œå³åŠéƒ¨åˆ†
 		if (left < j) quickSort(arr, left, j);
 		if (i < right) quickSort(arr, i, right);
 	}
