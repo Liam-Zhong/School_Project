@@ -5,49 +5,49 @@
 #include <string.h>
 #include <math.h>
 
-// ¶¨Òå²Ù×÷·ûÕ»µÄ½á¹¹
+// å®šä¹‰æ“ä½œç¬¦æ ˆçš„ç»“æž„
 struct OperatorStack {
 	char operators[100];
 	int top;
 };
 
-// ¶¨Òå²Ù×÷ÊýÕ»µÄ½á¹¹
+// å®šä¹‰æ“ä½œæ•°æ ˆçš„ç»“æž„
 struct OperandStack {
 	double operands[100];
 	int top;
 };
 
-// ³õÊ¼»¯²Ù×÷·ûÕ»
+// åˆå§‹åŒ–æ“ä½œç¬¦æ ˆ
 void initOperatorStack(struct OperatorStack* stack) {
 	stack->top = -1;
 }
 
-// ³õÊ¼»¯²Ù×÷ÊýÕ»
+// åˆå§‹åŒ–æ“ä½œæ•°æ ˆ
 void initOperandStack(struct OperandStack* stack) {
 	stack->top = -1;
 }
 
-// ²Ù×÷·ûÈëÕ»
+// æ“ä½œç¬¦å…¥æ ˆ
 void pushOperator(struct OperatorStack* stack, char operator) {
 	stack->operators[++stack->top] = operator;
 }
 
-// ²Ù×÷·û³öÕ»
+// æ“ä½œç¬¦å‡ºæ ˆ
 char popOperator(struct OperatorStack* stack) {
 	return stack->operators[stack->top--];
 }
 
-// ²Ù×÷ÊýÈëÕ»
+// æ“ä½œæ•°å…¥æ ˆ
 void pushOperand(struct OperandStack* stack, double operand) {
 	stack->operands[++stack->top] = operand;
 }
 
-// ²Ù×÷Êý³öÕ»
+// æ“ä½œæ•°å‡ºæ ˆ
 double popOperand(struct OperandStack* stack) {
 	return stack->operands[stack->top--];
 }
 
-// »ñÈ¡²Ù×÷·ûÓÅÏÈ¼¶
+// èŽ·å–æ“ä½œç¬¦ä¼˜å…ˆçº§
 int getOperatorPriority(char operator) {
 	if (operator == '+' || operator == '-') {
 		return 1;
@@ -58,7 +58,7 @@ int getOperatorPriority(char operator) {
 	return 0;
 }
 
-// ¼ÆËãÖÐ×º±í´ïÊ½µÄÖµ
+// è®¡ç®—ä¸­ç¼€è¡¨è¾¾å¼çš„å€¼
 double evaluateInfixExpression(const char* expression) {
 	struct OperatorStack operatorStack;
 	struct OperandStack operandStack;
@@ -68,7 +68,7 @@ double evaluateInfixExpression(const char* expression) {
 	int i = 0;
 	while (expression[i] != '=') {
 		if (expression[i] >= '0' && expression[i] <= '9') {
-			// ´¦Àí²Ù×÷Êý
+			// å¤„ç†æ“ä½œæ•°
 			double operand = 0.0;
 			while (expression[i] >= '0' && expression[i] <= '9') {
 				operand = operand * 10 + (expression[i] - '0');
@@ -130,7 +130,7 @@ double evaluateInfixExpression(const char* expression) {
 					pushOperand(&operandStack, operand1 / operand2);
 				}
 			}
-			popOperator(&operatorStack);  // µ¯³ö×óÀ¨ºÅ
+			popOperator(&operatorStack);  // å¼¹å‡ºå·¦æ‹¬å·
 			i++;
 		}
 		else {
