@@ -9,10 +9,10 @@ char saveLetter[26] = { '0' };
 int countNum[26] = { 0 };
 char codeTemp[MAXNUM] = { '0' };
 
-//¹ş·òÂüÊ÷µÄ´æ´¢±íÊ¾
+//å“ˆå¤«æ›¼æ ‘çš„å­˜å‚¨è¡¨ç¤º
 typedef struct HTNode {
-	int weight;//½áµãµÄÈ¨Öµ
-	int parent, lchild, rchild;//½áµãµÄË«Ç×¡¢×óº¢×Ó¡¢ÓÒº¢×ÓµÄÏÂ±ê
+	int weight;//ç»“ç‚¹çš„æƒå€¼
+	int parent, lchild, rchild;//ç»“ç‚¹çš„åŒäº²ã€å·¦å­©å­ã€å³å­©å­çš„ä¸‹æ ‡
 	char data;
 }HTNode, * HuffmanTree;
 
@@ -20,7 +20,7 @@ int Frequent(char s[], int& n) {
 	int len = strlen(s);
 	int num[26] = { 0 };
 
-	memset(num, 0, sizeof(num));//È«ÖÃÎª0
+	memset(num, 0, sizeof(num));//å…¨ç½®ä¸º0
 	int i = 0, j = 0;
 	while (s[i] != '\0') {
 		j = s[i] - 97;
@@ -50,8 +50,8 @@ int Frequent(char s[], int& n) {
 
 
 void Select(HuffmanTree& HT, int Max, int& s1, int& s2) {
-	int min = MAXNUM;//×îĞ¡Öµ
-	int lmin = MAXNUM;//´ÎĞ¡Öµ
+	int min = MAXNUM;//æœ€å°å€¼
+	int lmin = MAXNUM;//æ¬¡å°å€¼
 	for (int i = 1; i <= Max; i++) {
 		if (HT[i].parent == 0) {
 			if (HT[i].weight < min) {
@@ -71,38 +71,38 @@ void Select(HuffmanTree& HT, int Max, int& s1, int& s2) {
 }
 
 /*
-* ¹ş·òÂüÊ÷µÄ¸÷½Úµã´æ´¢ÔÚHuffmanTree¶¨ÒåµÄ¶¯Ì¬·ÖÅäµÄÊı×éÖĞ£¬ÎªÁËÊµÏÖ·½±ã£¬
-* Êı×éµÄ0ºÅµ¥Ôª²»Ê¹ÓÃ£¬´Ó1ºÅµ¥Ôª¿ªÊ¼Ê¹ÓÃ£¬ËùÒÔÊı×éµÄ´óĞ¡Îª2n
-* ½«Ò¶×Ó½áµã¼¯ÖĞ´æ´¢ÔÚÇ°Ãæ²¿·Ö1~n¸öÎ»ÖÃ£¬¶øºóÃæµÄn-1¸öÎ»ÖÃ´æ´¢ÆäÓà·ÇÒ¶×Ó½áµã
+* å“ˆå¤«æ›¼æ ‘çš„å„èŠ‚ç‚¹å­˜å‚¨åœ¨HuffmanTreeå®šä¹‰çš„åŠ¨æ€åˆ†é…çš„æ•°ç»„ä¸­ï¼Œä¸ºäº†å®ç°æ–¹ä¾¿ï¼Œ
+* æ•°ç»„çš„0å·å•å…ƒä¸ä½¿ç”¨ï¼Œä»1å·å•å…ƒå¼€å§‹ä½¿ç”¨ï¼Œæ‰€ä»¥æ•°ç»„çš„å¤§å°ä¸º2n
+* å°†å¶å­ç»“ç‚¹é›†ä¸­å­˜å‚¨åœ¨å‰é¢éƒ¨åˆ†1~nä¸ªä½ç½®ï¼Œè€Œåé¢çš„n-1ä¸ªä½ç½®å­˜å‚¨å…¶ä½™éå¶å­ç»“ç‚¹
 */
-void CreateHuffmanTree(HuffmanTree& HT, int n) {//¹¹Ôì¹ş·òÂüÊ÷HT
+void CreateHuffmanTree(HuffmanTree& HT, int n) {//æ„é€ å“ˆå¤«æ›¼æ ‘HT
 	if (n <= 1)
 		return;
 	int m = 2 * n - 1;
 	//cout << m << endl;
-	HT = new HTNode[m + 1];//0ºÅµ¥ÔªÎ´ÓÃ£¬ËùÒÔĞèÒª¶¯Ì¬·ÖÅäm+1¸öµ¥Ôª£¬HT[m]±íÊ¾¸ù½áµã
+	HT = new HTNode[m + 1];//0å·å•å…ƒæœªç”¨ï¼Œæ‰€ä»¥éœ€è¦åŠ¨æ€åˆ†é…m+1ä¸ªå•å…ƒï¼ŒHT[m]è¡¨ç¤ºæ ¹ç»“ç‚¹
 	for (int i = 1; i < m; i++) {
 		HT[i].parent = 0;
 		HT[i].lchild = 0;
 		HT[i].rchild = 0;
-		HT[i].data = saveLetter[i - 1];//×ÖÄ¸
+		HT[i].data = saveLetter[i - 1];//å­—æ¯
 	}
 	for (int i = 1; i <= n; i++) {
-		//cin >> HT[i].weight;//ÊäÈëÇ°n¸öµ¥ÔªÖĞÒ¶×Ó½áµãµÄÈ¨Öµ
+		//cin >> HT[i].weight;//è¾“å…¥å‰nä¸ªå•å…ƒä¸­å¶å­ç»“ç‚¹çš„æƒå€¼
 		HT[i].weight = countNum[i - 1];
 	}
 	int s1 = 0, s2 = 0;
-	//³õÊ¼»¯½áÊø£¬ÏÂÃæ¿ªÊ¼´´½¨¹ş·òÂüÊ÷
+	//åˆå§‹åŒ–ç»“æŸï¼Œä¸‹é¢å¼€å§‹åˆ›å»ºå“ˆå¤«æ›¼æ ‘
 	for (int i = n + 1; i <= m; i++) {
 		Select(HT, i - 1, s1, s2);
-		//ÔÚHT[k]£¨1<=k<=i-1)ÖĞÑ¡ÔñÁ½¸öÆäË«Ç×ÓòÎª0ÇÒÈ¨Öµ×îĞ¡µÄ½áµã£¬
-		//²¢·µ»ØËüÃÇÔÚHTÖĞµÄĞòºÅs1ºÍs2
+		//åœ¨HT[k]ï¼ˆ1<=k<=i-1)ä¸­é€‰æ‹©ä¸¤ä¸ªå…¶åŒäº²åŸŸä¸º0ä¸”æƒå€¼æœ€å°çš„ç»“ç‚¹ï¼Œ
+		//å¹¶è¿”å›å®ƒä»¬åœ¨HTä¸­çš„åºå·s1å’Œs2
 		HT[s1].parent = i;
 		HT[s2].parent = i;
-		//µÃµ½ĞÂ½áµãi,´ÓÉ­ÁÖÖĞÉ¾³ıs1,s2,½«s1ºÍs2µÄË«Ç×ÓòÓÉ0¸ÄÎªi
+		//å¾—åˆ°æ–°ç»“ç‚¹i,ä»æ£®æ—ä¸­åˆ é™¤s1,s2,å°†s1å’Œs2çš„åŒäº²åŸŸç”±0æ”¹ä¸ºi
 		HT[i].lchild = s1;
-		HT[i].rchild = s2;//s1,s2·Ö±ğ×÷ÎªiµÄ×óÓÒº¢×Ó
-		HT[i].weight = HT[s1].weight + HT[s2].weight;//iµÄÈ¨ÖµÎª×óÓÒº¢×ÓÈ¨ÖµÖ®ºÍ
+		HT[i].rchild = s2;//s1,s2åˆ†åˆ«ä½œä¸ºiçš„å·¦å³å­©å­
+		HT[i].weight = HT[s1].weight + HT[s2].weight;//içš„æƒå€¼ä¸ºå·¦å³å­©å­æƒå€¼ä¹‹å’Œ
 		if (i == m) {
 			HT[i].parent = 0;
 		}
@@ -123,28 +123,28 @@ void ShowHT(HuffmanTree& HT, int n) {
 typedef char** HuffmanTreeCode;
 
 void CreateHuffmanCode(HuffmanTree HT, HuffmanTreeCode& HC, int n) {
-	//´ÓÒ¶×Óµ½¸ùÄæÏòÇóÃ¿¸ö×Ö·ûµÄ¹ş·òÂü±àÂë£¬´æ´¢ÔÚ±àÂë±íHCÖĞ
-	HC = new char* [n + 1];//·ÖÅä´æ´¢n¸ö×Ö·û±àÂëµÄ±àÂë±í¿Õ¼ä
+	//ä»å¶å­åˆ°æ ¹é€†å‘æ±‚æ¯ä¸ªå­—ç¬¦çš„å“ˆå¤«æ›¼ç¼–ç ï¼Œå­˜å‚¨åœ¨ç¼–ç è¡¨HCä¸­
+	HC = new char* [n + 1];//åˆ†é…å­˜å‚¨nä¸ªå­—ç¬¦ç¼–ç çš„ç¼–ç è¡¨ç©ºé—´
 	char* cd;
-	cd = new char[n];//·ÖÅäÁÙÊ±´æ·ÅÃ¿¸ö×Ö·û±àÂëµÄ¶¯Ì¬Êı×é¿Õ¼ä
-	cd[n - 1] = '\0';//±àÂë½áÊø·û
+	cd = new char[n];//åˆ†é…ä¸´æ—¶å­˜æ”¾æ¯ä¸ªå­—ç¬¦ç¼–ç çš„åŠ¨æ€æ•°ç»„ç©ºé—´
+	cd[n - 1] = '\0';//ç¼–ç ç»“æŸç¬¦
 	int start = 0, c, f = 0;
-	for (int i = 1; i <= n; i++) {//Öğ¸ö×Ö·ûÇó¹ş·òÂü±àÂë
-		start = n - 1;//start¿ªÊ¼Ê±Ö¸Ïò×îºó£¬¼´±àÂë½áÊø·ûÎ»ÖÃ
+	for (int i = 1; i <= n; i++) {//é€ä¸ªå­—ç¬¦æ±‚å“ˆå¤«æ›¼ç¼–ç 
+		start = n - 1;//startå¼€å§‹æ—¶æŒ‡å‘æœ€åï¼Œå³ç¼–ç ç»“æŸç¬¦ä½ç½®
 		c = i;
-		f = HT[i].parent;//fÖ¸Ïò½áµãcµÄË«Ç×½áµã
-		while (f != 0) {//´ÓÒ¶×Ó½áµã¿ªÊ¼ÏòÉÏ»ØËİ£¬Ö±µ½¸ù½áµã
-			start--;//»ØËİÒ»´ÎstartÏòÇ°Ö¸ÏòÒ»¸öÎ»ÖÃ
+		f = HT[i].parent;//fæŒ‡å‘ç»“ç‚¹cçš„åŒäº²ç»“ç‚¹
+		while (f != 0) {//ä»å¶å­ç»“ç‚¹å¼€å§‹å‘ä¸Šå›æº¯ï¼Œç›´åˆ°æ ¹ç»“ç‚¹
+			start--;//å›æº¯ä¸€æ¬¡startå‘å‰æŒ‡å‘ä¸€ä¸ªä½ç½®
 			if (HT[f].lchild == c)
-				cd[start] = '0';//½áµãcÊÇfµÄ×óº¢×Ó£¬ÔòÉú³É´úÂë0
+				cd[start] = '0';//ç»“ç‚¹cæ˜¯fçš„å·¦å­©å­ï¼Œåˆ™ç”Ÿæˆä»£ç 0
 			else
-				cd[start] = '1';//½áµãcÊÇfµÄÓÒº¢×Ó£¬ÔòÉú³É´úÂë1
-			c = f; f = HT[f].parent;//¼ÌĞøÏòÉÏ»ØËİ
+				cd[start] = '1';//ç»“ç‚¹cæ˜¯fçš„å³å­©å­ï¼Œåˆ™ç”Ÿæˆä»£ç 1
+			c = f; f = HT[f].parent;//ç»§ç»­å‘ä¸Šå›æº¯
 		}
-		HC[i] = new char[n - start];//ÎªµÚi¸ö×Ö·û±àÂë·ÖÅŞ¿Õ¼ä
-		strcpy(HC[i], &cd[start]);//½«ÇóµÃµÄ±àÂë´ÓÁÙÊ±¿Õ¼äcd¸´ÖÆµ½HCµÄµ±Ç°ĞĞÖĞ
+		HC[i] = new char[n - start];//ä¸ºç¬¬iä¸ªå­—ç¬¦ç¼–ç åˆ†å‘¸ç©ºé—´
+		strcpy(HC[i], &cd[start]);//å°†æ±‚å¾—çš„ç¼–ç ä»ä¸´æ—¶ç©ºé—´cdå¤åˆ¶åˆ°HCçš„å½“å‰è¡Œä¸­
 	}
-	delete[] cd;//ÊÍ·ÅÁÙÊ±¿Õ¼ä
+	delete[] cd;//é‡Šæ”¾ä¸´æ—¶ç©ºé—´
 }
 
 void ShowCode(HuffmanTree& HT, HuffmanTreeCode& HC, int n, char str1[]) {
@@ -162,12 +162,12 @@ void ShowCode(HuffmanTree& HT, HuffmanTreeCode& HC, int n, char str1[]) {
 void CreateHuffmanReCode(HuffmanTree& HT, HuffmanTreeCode& HC, int n) {
 	int i = 2 * n - 1;
 	int j = 0;
-	while (codeTemp[j] != '\0') {//codeTempÊÇÔİ´æ01±àÂë´®
+	while (codeTemp[j] != '\0') {//codeTempæ˜¯æš‚å­˜01ç¼–ç ä¸²
 		if (codeTemp[j] == '0') {
-			i = HT[i].lchild;//×óº¢×Ó
+			i = HT[i].lchild;//å·¦å­©å­
 		}
 		else if (codeTemp[j] == '1') {
-			i = HT[i].rchild;//ÓÒº¢×Ó
+			i = HT[i].rchild;//å³å­©å­
 		}
 		if (HT[i].lchild == 0) {
 			cout << HT[i].data;
@@ -204,7 +204,7 @@ int main() {
 		ShowHC(hc, n);
 		ShowCode(ht, hc, n, string);
 		CreateHuffmanReCode(ht, hc, n);
-		memset(codeTemp, 0, sizeof codeTemp);//Çå¿ÕÊı×é
+		memset(codeTemp, 0, sizeof codeTemp);//æ¸…ç©ºæ•°ç»„
 	}
 
 }
